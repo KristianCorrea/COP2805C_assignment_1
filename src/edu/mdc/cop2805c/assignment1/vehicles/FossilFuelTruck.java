@@ -5,7 +5,7 @@ import edu.mdc.cop2805c.assignment1.interfaces.FossilFuelVehicle;
 
 public class FossilFuelTruck extends Vehicle implements FossilFuelVehicle{
     int grossVehicleWeightRatingTon; //Gross weight TON
-    int engineDisplacementL; //Engine displacement in Liters
+    double engineDisplacementL; //Engine displacement in Liters
     FossilFuelType fossilFuelType; //Fuel type
 
     final int CO2_GASOLINE_TRUCK_EMISSION_FACTOR = 11100;
@@ -13,7 +13,7 @@ public class FossilFuelTruck extends Vehicle implements FossilFuelVehicle{
     final double NOX_GASOLINE_TRUCK_EMISSION_FACTOR = 2.10;
     final double NOX_DIESEL_TRUCK_EMISSION_FACTOR = 4.60;
 
-    public FossilFuelTruck(String make, String VIN, String model, int year, int weight, int engineDisplacement, FossilFuelType fuelType, int grossVehicleWeightRatingTon) {
+    public FossilFuelTruck(String make, String VIN, String model, int year, int grossVehicleWeightRatingTon, double engineDisplacement, FossilFuelType fuelType) {
         this.VIN = VIN;
         this.make = make;
         this.model = model;
@@ -33,7 +33,11 @@ public class FossilFuelTruck extends Vehicle implements FossilFuelVehicle{
     }
     @Override
     public String getDescription() {
-        return "Type: "+getVehicleType()+", SubType: "+getVehicleSubType()+", Make: "+make+", VIN: "+VIN+", Model: "+model+", Year: "+year+", Weight: "+grossVehicleWeightRatingTon+"T, Engine Displacement: "+engineDisplacementL+"L, Fuel Type: "+fossilFuelType;
+        return "Model: "+model+", Make: "+make+", Type: "+getVehicleType()+", SubType: "+getVehicleSubType()+", VIN: "+VIN+", Year: "+year+", Weight: "+grossVehicleWeightRatingTon+"T, Engine Displacement: "+engineDisplacementL+"L, Fuel Type: "+fossilFuelType;
+    }
+    @Override
+    public String toFileFormat() {
+        return super.toFileFormat()+","+grossVehicleWeightRatingTon+","+engineDisplacementL+","+(fossilFuelType == FossilFuelType.GASOLINE ? 1 : 2);
     }
     @Override
     public double estimateFuelEfficiency() {

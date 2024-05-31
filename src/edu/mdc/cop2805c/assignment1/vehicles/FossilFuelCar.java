@@ -38,7 +38,12 @@ public class FossilFuelCar extends Vehicle implements FossilFuelVehicle{
 
     @Override
     public String getDescription() {
-        return "Type: "+getVehicleType()+", SubType: "+getVehicleSubType()+", Make: "+make+", VIN: "+VIN+", Model: "+model+", Year: "+year+", Weight: "+weightKg+"Kg, Engine Displacement: "+engineDisplacementL+"L, Transmission: "+transmissionType+", Fuel Type: "+fossilFuelType;
+        return "Model: "+model+", Make: "+make+", Type: "+getVehicleType()+", SubType: "+getVehicleSubType()+", VIN: "+VIN+", Year: "+year+", Weight: "+weightKg+"Kg, Engine Displacement: "+engineDisplacementL+"L, Transmission: "+transmissionType+", Fuel Type: "+fossilFuelType;
+    }
+
+    @Override
+    public String toFileFormat() {
+        return super.toFileFormat()+","+weightKg+","+engineDisplacementL+","+ (transmissionType == TransmissionType.AUTOMATIC ? 1 : 2)+","+(fossilFuelType == FossilFuelType.GASOLINE ? 1 : 2);
     }
     
     @Override

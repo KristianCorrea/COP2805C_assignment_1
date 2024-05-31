@@ -27,7 +27,11 @@ public class ElectricCar extends Vehicle implements ElectricVehicle{
 
     @Override
     public String getDescription() {
-        return "Type: " + getVehicleType() + ", Subtype: " + getVehicleSubType() + ", Make: " + make + ", VIN: "+VIN+", Model: " + model + ", Year: " + year + ", Electricity Consumed Per Mile: " + electricityConsumedPerMilekWh + " kWh";
+        return "Model: "+model+", Make: "+make+", Type: " + getVehicleType() + ", Subtype: " + getVehicleSubType() + ", VIN: "+VIN + ", Year: " + year + ", Electricity Consumed Per Mile: " + electricityConsumedPerMilekWh + " kWh";
+    }
+    @Override
+    public String toFileFormat() {
+        return super.toFileFormat()+","+electricityConsumedPerMilekWh;
     }
     @Override
     public double estimateFuelEfficiencyEquivalent() {
